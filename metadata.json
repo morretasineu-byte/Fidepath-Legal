@@ -1,0 +1,6 @@
+{
+  "name": "FidePath Expert Services",
+  "description": "Independent technical consultancy in forensic planning, construction delay analysis, extension of time assessment, and expert reports.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

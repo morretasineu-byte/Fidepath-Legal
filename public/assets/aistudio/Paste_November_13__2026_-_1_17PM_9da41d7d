@@ -1,0 +1,427 @@
+# PROMPT 2 — Legal pages, launch version without contact form (paste into Google AI Studio after Prompts 0C and 0D)
+
+Now add the legal pages to the FidePath website. The site currently has NO contact form: visitors contact by e-mail, telephone or LinkedIn. (A form linked to Airtable will be added later with a separate prompt, which will update the privacy policy.) Follow these rules strictly:
+
+1. Create 9 pages (3 per language) with these exact routes and link them from the footer of every page, in the active language only. Add the language switcher logic so that switching language on a legal page goes to the equivalent page in the other language.
+   - EN: `/en/legal-notice`, `/en/privacy-policy`, `/en/cookie-policy`
+   - CA: `/ca/avis-legal`, `/ca/politica-de-privadesa`, `/ca/politica-de-cookies`
+   - ES: `/es/aviso-legal`, `/es/politica-de-privacidad`, `/es/politica-de-cookies`
+2. Use the text below **verbatim**. Do not rewrite, summarise, shorten, "improve" or translate it. Do not invent any missing data.
+3. Any text in square brackets such as `[COMPLETAR: ...]` is a placeholder the owner will fill in later. Keep it exactly as written and render it inside a `<mark>` element (soft yellow background) so it is easy to find. Put all legal copy in one file per language (`src/content/legal.en.ts`, `legal.ca.ts`, `legal.es.ts`) so placeholders can be replaced in one place.
+4. Layout: narrow readable column (max ~72ch), clear H1/H2 hierarchy, table of contents at the top of the privacy policy, tables rendered as real accessible tables (scrollable on mobile), same header/footer as the rest of the site, same palette (white / black / soft greys / anthracite). `<meta name="robots" content="noindex">` is NOT needed; legal pages should be indexable.
+5. Do NOT create a form. Create a reusable component `<ContactPrivacyNote />` that shows the "Basic data protection information" table (first layer) in the active language, in the Contact section directly under the e-mail / telephone / LinkedIn links, with a link to the privacy policy. It has no checkbox. Use the "FIRST LAYER" texts below.
+6. Do NOT add a cookie banner, analytics, tracking pixels, external fonts, maps or embeds. If any are present, remove them. Add a constant `ANALYTICS_ENABLED = false` and a comment: "If this ever becomes true, a consent banner with Accept / Reject / Configure in the first layer and prior blocking is mandatory, and the cookie policy must be updated."
+
+Texts start here.
+
+════════════════════════════════════════
+## FIRST LAYER (under the contact details)
+════════════════════════════════════════
+
+### EN
+**Basic data protection information**
+
+| | |
+|---|---|
+| **Controller** | [COMPLETAR: legal owner's name / company name], trading as FidePath Expert Services |
+| **Purpose** | Handling the enquiry you send us by e-mail, telephone or LinkedIn and, where relevant, preparing a proposal for our services |
+| **Legal basis** | Your consent, given by contacting us, and, where applicable, steps taken at your request before entering into a contract |
+| **Recipients** | Technology providers acting on our behalf (website hosting and e-mail) [COMPLETAR/VALIDAR: provider names]. No other disclosures, except where required by law. [COMPLETAR/VALIDAR: international transfers] |
+| **Rights** | You may access, rectify and erase your data, and exercise other rights, as explained in the additional information |
+| **Additional information** | See our [Privacy Policy](/en/privacy-policy) |
+
+
+### CA
+**Informació bàsica sobre protecció de dades**
+
+| | |
+|---|---|
+| **Responsable** | [COMPLETAR: nom del titular legal / denominació social], amb nom comercial FidePath Expert Services |
+| **Finalitat** | Atendre la consulta que ens enviïs per correu electrònic, telèfon o LinkedIn i, si escau, preparar una proposta dels nostres serveis |
+| **Legitimació** | El teu consentiment, atorgat en contactar-nos, i, si escau, l'aplicació de mesures precontractuals a petició teva |
+| **Destinataris** | Proveïdors tecnològics que actuen per compte nostre (allotjament web i correu electrònic) [COMPLETAR/VALIDAR: noms dels proveïdors]. Cap altra cessió, tret d'obligació legal. [COMPLETAR/VALIDAR: transferències internacionals] |
+| **Drets** | Pots accedir, rectificar i suprimir les teves dades, així com exercir altres drets, tal com s'explica a la informació addicional |
+| **Informació addicional** | Consulta la nostra [Política de privadesa](/ca/politica-de-privadesa) |
+
+
+### ES
+**Información básica sobre protección de datos**
+
+| | |
+|---|---|
+| **Responsable** | [COMPLETAR: nombre del titular legal / denominación social], con nombre comercial FidePath Expert Services |
+| **Finalidad** | Atender la consulta que nos envíes por correo electrónico, teléfono o LinkedIn y, en su caso, preparar una propuesta de nuestros servicios |
+| **Legitimación** | Tu consentimiento, otorgado al contactarnos, y, en su caso, la aplicación de medidas precontractuales a petición tuya |
+| **Destinatarios** | Proveedores tecnológicos que actúan por cuenta nuestra (alojamiento web y correo electrónico) [COMPLETAR/VALIDAR: nombres de los proveedores]. Ninguna otra cesión, salvo obligación legal. [COMPLETAR/VALIDAR: transferencias internacionales] |
+| **Derechos** | Puedes acceder, rectificar y suprimir tus datos, así como ejercer otros derechos, como se explica en la información adicional |
+| **Información adicional** | Consulta nuestra [Política de privacidad](/es/politica-de-privacidad) |
+
+
+════════════════════════════════════════
+## ENGLISH
+════════════════════════════════════════
+
+### PAGE `/en/legal-notice` — Legal Notice
+
+*Last updated: [COMPLETAR: publication date]*
+
+**1. Website owner**
+In compliance with Article 10 of Spanish Law 34/2002 on Information Society Services and Electronic Commerce (LSSI), the owner of this website is:
+
+- Name / corporate name: [COMPLETAR: legal owner — full name or company name]
+- Trading name: FidePath Expert Services
+- Tax ID (NIF/NIE/CIF): [COMPLETAR: tax identification number]
+- Address: Carrer Desbach 3, 1r esquerra, Palma (Balears), Spain [COMPLETAR/VALIDAR: confirm this is the professional address that may be published; add postal code]
+- E-mail: joan.perello@fidepath.com
+- Telephone: +34 615 847 893 [COMPLETAR/VALIDAR: confirm number]
+- Commercial Registry (companies only): [COMPLETAR: registry, volume, folio, sheet — or delete if not applicable]
+- Domain: fidepath.com [COMPLETAR/VALIDAR: confirm registration and ownership]
+- Professional data (only if a regulated profession is practised): official Spanish degree "Ingeniero de Caminos, Canales y Puertos" (Universitat Politècnica de Catalunya, Spain); professional body and membership number [COMPLETAR/VALIDAR: e.g. CICCP, number — the CV shows 31985; confirm what it refers to]; applicable professional rules [COMPLETAR/VALIDAR]. Delete this line if the owner confirms it does not apply.
+
+**2. Purpose of the website**
+This website presents the independent technical consultancy services offered by FidePath Expert Services: forensic planning, construction delay analysis, extension of time assessment, disruption analysis, independent expert reports, and technical support in construction claims and disputes, for clients in the United Kingdom, Europe and the Middle East [COMPLETAR/VALIDAR: scope of services and territories], and allows visitors to send an enquiry.
+
+**3. Nature of the information**
+The content of this website is informational and technical. It is not legal advice and does not create a professional engagement. Any engagement is formalised separately in a written agreement that sets out its scope, deliverables, fees and conditions.
+
+**4. Terms of use**
+Access to this website is free. Users undertake to use it lawfully and in good faith, and not to use it in ways that are unlawful, harmful to third parties, or that may damage, overload or impair the website or its availability.
+
+**5. Intellectual and industrial property**
+Texts, images, design, structure and other content of this website belong to the owner or are used under licence, and are protected by intellectual property law. [COMPLETAR/VALIDAR: ownership/registration of the FidePath trade name and mark.] Reproduction, distribution or modification without prior written permission is not allowed, except as permitted by law.
+
+**6. Liability**
+We make reasonable efforts to keep the information accurate and up to date, but we do not guarantee that the website will always be available or free of errors. The information is general and should not be relied on as a substitute for a specific analysis of your project. We are not responsible for the content of third-party websites that may be linked from this site.
+
+**7. Links**
+This website may contain links to third-party websites (for example, our LinkedIn profile). We do not control them and are not responsible for their content or privacy practices.
+
+**8. Data protection and cookies**
+Personal data processing is explained in our [Privacy Policy](/en/privacy-policy). Information about cookies is available in our [Cookie Policy](/en/cookie-policy).
+
+**9. Governing law and jurisdiction**
+This Legal Notice is governed by Spanish law. For any dispute, the parties submit to the courts of Palma (Balearic Islands), without prejudice to any mandatory rules protecting consumers [COMPLETAR/VALIDAR: jurisdiction].
+
+---
+
+### PAGE `/en/privacy-policy` — Privacy Policy
+
+*Last updated: [COMPLETAR: publication date]*
+
+This policy explains how we handle the personal data you send us through this website.
+
+**1. Who is responsible for your data?**
+- Controller: [COMPLETAR: legal owner — full name or company name], trading as FidePath Expert Services
+- Tax ID: [COMPLETAR: NIF/NIE/CIF]
+- Address: Carrer Desbach 3, 1r esquerra, Palma (Balears), Spain [COMPLETAR/VALIDAR]
+- E-mail for privacy matters: joan.perello@fidepath.com [COMPLETAR/VALIDAR: dedicated e-mail, if any]
+- Data Protection Officer: not appointed [COMPLETAR/VALIDAR]
+
+**2. What data do we collect?**
+When you contact us by e-mail, telephone or LinkedIn: your name, e-mail address and/or telephone number, your company and position if you provide them, and the content of your message and any information about your project that you choose to share. Our hosting provider may also process technical data such as IP address, browser and device information in server logs, for security and operation [COMPLETAR/VALIDAR: check against the final technical set-up].
+
+Please do not send contracts, drawings, programmes or other project documents, or personal data of third parties, in your first message. If we proceed with your enquiry, we will tell you how to send documents securely.
+
+**3. What do we use your data for, and on what legal basis?**
+
+| Purpose | Legal basis |
+|---|---|
+| Answering your enquiry and contacting you about it | Your consent, given by contacting us — Art. 6.1.a GDPR |
+| Preparing a proposal or quotation you have asked for | Steps taken at your request before entering into a contract — Art. 6.1.b GDPR |
+| Keeping a record of enquiries to manage possible future contact and to defend ourselves in claims | Our legitimate interest in managing and defending our professional activity — Art. 6.1.f GDPR [COMPLETAR/VALIDAR] |
+| Complying with tax, accounting and other legal obligations if we end up providing services | Legal obligation — Art. 6.1.c GDPR |
+
+Providing the required fields is necessary to handle your enquiry; without them we cannot reply. We do not send newsletters or commercial mailings, we do not take automated decisions about you and we do not create profiles [COMPLETAR/VALIDAR]. You can withdraw your consent at any time, without affecting the lawfulness of the processing carried out before.
+
+**4. How long do we keep your data?**
+- Enquiries that do not lead to an engagement: up to [COMPLETAR/VALIDAR: proposed 12] months from our last contact, then deleted or anonymised.
+- If we provide services: for the duration of the relationship and afterwards for the legal limitation periods applicable to tax, accounting and contractual liability.
+- Where a claim is pending, until it is resolved.
+
+**5. Who receives your data?**
+Only technology providers that process data on our behalf and under a data processing agreement: [COMPLETAR: website hosting provider (e.g. Vercel — to be confirmed)], [COMPLETAR: e-mail provider hosting joan.perello@fidepath.com]. We do not disclose data to other third parties except where required by law (e.g. tax authorities, courts).
+
+**6. International transfers**
+[COMPLETAR/VALIDAR: Some providers may process data outside the European Economic Area, for example in the United States. In that case, transfers rely on [adequacy decision / EU–US Data Privacy Framework / Standard Contractual Clauses] and you may request a copy of the safeguards by writing to us. If no transfer takes place, say so here.]
+
+**7. What are your rights?**
+You may exercise your rights of access, rectification, erasure, objection, restriction of processing and portability, and withdraw your consent, by writing to joan.perello@fidepath.com [COMPLETAR/VALIDAR] and stating which right you wish to exercise. We may ask you to verify your identity. You also have the right to lodge a complaint with the Spanish Data Protection Agency (AEPD) — [www.aepd.es](https://www.aepd.es) — if you consider that your data protection rights have been infringed.
+
+**8. Third-party data, project documents and security**
+This website is aimed at professionals and companies and is not intended for minors. If an engagement involves project documents containing personal data of third parties, our role (independent controller or processor) will be determined case by case and set out in the engagement agreement, including, where required, a data processing agreement. We apply appropriate technical and organisational measures to protect your data [COMPLETAR/VALIDAR: describe measures].
+
+**9. Changes to this policy**
+We may update this policy to reflect changes in our activity or in the law. The date of the latest version appears at the top.
+
+---
+
+### PAGE `/en/cookie-policy` — Cookie Policy
+
+*Last updated: [COMPLETAR: publication date]*
+
+**1. What are cookies?**
+Cookies and similar technologies are small files or pieces of information that a website stores on your device when you visit it. They can be strictly necessary for the site to work, or used for analytics, personalisation or advertising.
+
+**2. What do we use on this website?**
+This website is designed to work without non-essential cookies: it does not use analytics, advertising or tracking cookies, does not embed third-party content (such as maps or videos) and does not load external fonts or scripts. [COMPLETAR/VALIDAR: after scanning the published website at fidepath.com, list here every cookie or similar storage found, with name, owner, purpose and duration — or state "At the date of this policy, no cookies are set".]
+
+| Name | Owner | Purpose | Duration | Type |
+|---|---|---|---|---|
+| [COMPLETAR/VALIDAR] | [COMPLETAR] | [COMPLETAR] | [COMPLETAR] | Strictly necessary |
+
+Strictly necessary technical cookies do not require your consent. Our hosting provider may process technical data (such as IP address) in server logs for security and operation; see our [Privacy Policy](/en/privacy-policy).
+
+**3. If this changes**
+If we ever add non-essential cookies (for example, analytics), we will first update this policy and ask for your consent through a banner that lets you accept, reject or configure them with equal ease, and we will not set them before you consent.
+
+**4. How to manage cookies in your browser**
+You can allow, block or delete cookies in your browser settings. Instructions: [Chrome](https://support.google.com/chrome/answer/95647), [Firefox](https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop), [Safari](https://support.apple.com/guide/safari/manage-cookies-sfri11471/mac), [Edge](https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09).
+
+**5. Contact**
+For questions about this policy: joan.perello@fidepath.com.
+
+════════════════════════════════════════
+## CATALÀ
+════════════════════════════════════════
+
+### PÀGINA `/ca/avis-legal` — Avís legal
+
+*Darrera actualització: [COMPLETAR: data de publicació]*
+
+**1. Titular del lloc web**
+En compliment de l'article 10 de la Llei 34/2002, de serveis de la societat de la informació i de comerç electrònic (LSSI), el titular d'aquest lloc web és:
+
+- Nom / denominació social: [COMPLETAR: titular legal — nom i cognoms o denominació social]
+- Nom comercial: FidePath Expert Services
+- NIF/NIE/CIF: [COMPLETAR: número d'identificació fiscal]
+- Adreça: Carrer Desbach 3, 1r esquerra, Palma (Balears), Espanya [COMPLETAR/VALIDAR: confirmar que és el domicili professional publicable; afegir codi postal]
+- Correu electrònic: joan.perello@fidepath.com
+- Telèfon: +34 615 847 893 [COMPLETAR/VALIDAR: confirmar el número]
+- Registre Mercantil (només societats): [COMPLETAR: registre, tom, foli, full — o eliminar si no aplica]
+- Domini: fidepath.com [COMPLETAR/VALIDAR: confirmar registre i titularitat]
+- Dades professionals (només si s'exerceix una professió regulada): títol oficial espanyol d'«Ingeniero de Caminos, Canales y Puertos» (Universitat Politècnica de Catalunya, Espanya); col·legi o institució professional i número [COMPLETAR/VALIDAR: p. ex. CICCP, número — el CV indica 31985; confirmar a què correspon]; normes professionals aplicables [COMPLETAR/VALIDAR]. Eliminar aquesta línia si es confirma que no aplica.
+
+**2. Objecte del lloc web**
+Aquest lloc web presenta els serveis de consultoria tècnica independent de FidePath Expert Services: planificació forense, anàlisi de retards en obres de construcció, avaluació d'ampliacions de termini, anàlisi de disrupcions, informes pericials independents i suport tècnic en reclamacions i controvèrsies de construcció, per a clients del Regne Unit, Europa i l'Orient Mitjà [COMPLETAR/VALIDAR: abast dels serveis i territoris], i permet als visitants enviar una consulta.
+
+**3. Naturalesa de la informació**
+El contingut d'aquest lloc web és informatiu i tècnic. No constitueix assessorament jurídic ni crea cap relació professional. Qualsevol encàrrec es formalitza per separat en un acord escrit que en recull l'abast, els lliurables, els honoraris i les condicions.
+
+**4. Condicions d'ús**
+L'accés a aquest lloc web és gratuït. Els usuaris es comprometen a fer-ne un ús lícit i de bona fe, i a no utilitzar-lo de manera il·lícita, perjudicial per a tercers o que pugui danyar, sobrecarregar o deteriorar el lloc web o la seva disponibilitat.
+
+**5. Propietat intel·lectual i industrial**
+Els textos, imatges, disseny, estructura i altres continguts d'aquest lloc web pertanyen al titular o s'utilitzen amb llicència, i estan protegits per la legislació de propietat intel·lectual. [COMPLETAR/VALIDAR: titularitat/registre del nom comercial i la marca FidePath.] No es permet la reproducció, distribució o modificació sense autorització prèvia i per escrit, excepte en els casos permesos per la llei.
+
+**6. Responsabilitat**
+Procurem mantenir la informació exacta i actualitzada, però no garantim que el lloc web estigui sempre disponible ni lliure d'errors. La informació és de caràcter general i no substitueix una anàlisi específica del teu projecte. No ens fem responsables del contingut de llocs web de tercers als quals es pugui enllaçar des d'aquí.
+
+**7. Enllaços**
+Aquest lloc web pot contenir enllaços a llocs de tercers (per exemple, el nostre perfil de LinkedIn). No els controlem ni responem del seu contingut ni de les seves pràctiques de privadesa.
+
+**8. Protecció de dades i cookies**
+El tractament de dades personals s'explica a la nostra [Política de privadesa](/ca/politica-de-privadesa). La informació sobre cookies és a la nostra [Política de cookies](/ca/politica-de-cookies).
+
+**9. Legislació aplicable i jurisdicció**
+Aquest Avís legal es regeix per la legislació espanyola. Per a qualsevol controvèrsia, les parts se sotmeten als jutjats i tribunals de Palma (Illes Balears), sense perjudici de les normes imperatives de protecció dels consumidors [COMPLETAR/VALIDAR: jurisdicció].
+
+---
+
+### PÀGINA `/ca/politica-de-privadesa` — Política de privadesa
+
+*Darrera actualització: [COMPLETAR: data de publicació]*
+
+Aquesta política explica com tractem les dades personals que ens envies a través d'aquest lloc web.
+
+**1. Qui és el responsable de les teves dades?**
+- Responsable: [COMPLETAR: titular legal — nom i cognoms o denominació social], amb nom comercial FidePath Expert Services
+- NIF/NIE/CIF: [COMPLETAR]
+- Adreça: Carrer Desbach 3, 1r esquerra, Palma (Balears), Espanya [COMPLETAR/VALIDAR]
+- Correu electrònic per a qüestions de privadesa: joan.perello@fidepath.com [COMPLETAR/VALIDAR: correu específic, si n'hi ha]
+- Delegat de protecció de dades: no designat [COMPLETAR/VALIDAR]
+
+**2. Quines dades recollim?**
+Quan ens contactes per correu electrònic, telèfon o LinkedIn: el teu nom, adreça electrònica i/o telèfon, l'empresa i el càrrec si els facilites, i el contingut del missatge i la informació sobre el projecte que decideixis compartir. El nostre proveïdor d'allotjament també pot tractar dades tècniques, com l'adreça IP o informació del navegador i del dispositiu, en registres del servidor, per motius de seguretat i funcionament [COMPLETAR/VALIDAR: comprovar amb la configuració tècnica final].
+
+Et demanem que no enviïs al primer missatge contractes, plànols, programacions ni altres documents del projecte, ni dades personals de tercers. Si donem curs a la teva consulta, t'indicarem com enviar-nos documents de manera segura.
+
+**3. Per a què fem servir les teves dades i amb quina base jurídica?**
+
+| Finalitat | Base jurídica |
+|---|---|
+| Respondre la teva consulta i contactar-te per aquest motiu | El teu consentiment, atorgat en contactar-nos — art. 6.1.a RGPD |
+| Preparar la proposta o pressupost que hagis sol·licitat | Aplicació de mesures precontractuals a petició teva — art. 6.1.b RGPD |
+| Conservar un registre de consultes per gestionar possibles contactes futurs i defensar-nos davant de reclamacions | El nostre interès legítim a gestionar i defensar la nostra activitat professional — art. 6.1.f RGPD [COMPLETAR/VALIDAR] |
+| Complir obligacions fiscals, comptables i altres obligacions legals si arribem a prestar serveis | Obligació legal — art. 6.1.c RGPD |
+
+Facilitar els camps obligatoris és necessari per atendre la teva consulta; sense ells no et podem respondre. No enviem butlletins ni comunicacions comercials, no prenem decisions automatitzades sobre tu ni elaborem perfils [COMPLETAR/VALIDAR]. Pots retirar el consentiment en qualsevol moment, sense que afecti la licitud del tractament fet abans.
+
+**4. Quant de temps conservem les teves dades?**
+- Consultes que no donen lloc a un encàrrec: fins a [COMPLETAR/VALIDAR: proposta de 12] mesos des de l'últim contacte; després se suprimeixen o s'anonimitzen.
+- Si prestem serveis: durant la relació i, després, durant els terminis legals de prescripció aplicables en matèria fiscal, comptable i de responsabilitat contractual.
+- Si hi ha una reclamació pendent, fins que es resolgui.
+
+**5. Qui rep les teves dades?**
+Només proveïdors tecnològics que tracten dades per compte nostre i amb un contracte d'encàrrec del tractament: [COMPLETAR: proveïdor d'allotjament web (p. ex. Vercel — pendent de confirmar)], [COMPLETAR: proveïdor de correu electrònic de joan.perello@fidepath.com]. No cedim dades a altres tercers, tret d'obligació legal (p. ex. administracions tributàries, jutjats).
+
+**6. Transferències internacionals**
+[COMPLETAR/VALIDAR: Alguns proveïdors poden tractar dades fora de l'Espai Econòmic Europeu, per exemple als Estats Units. En aquest cas, les transferències es basen en [decisió d'adequació / Marc de Privadesa de Dades UE–EUA / Clàusules contractuals tipus] i pots sol·licitar-nos una còpia de les garanties. Si no hi ha cap transferència, indicar-ho aquí.]
+
+**7. Quins drets tens?**
+Pots exercir els drets d'accés, rectificació, supressió, oposició, limitació del tractament i portabilitat, i retirar el consentiment, escrivint a joan.perello@fidepath.com [COMPLETAR/VALIDAR] i indicant quin dret vols exercir. Et podem demanar que acreditis la teva identitat. També tens dret a presentar una reclamació davant l'Agència Espanyola de Protecció de Dades (AEPD) — [www.aepd.es](https://www.aepd.es) — si consideres que s'han vulnerat els teus drets.
+
+**8. Dades de tercers, documents de projecte i seguretat**
+Aquest lloc web s'adreça a professionals i empreses i no està pensat per a menors. Si un encàrrec implica documents de projecte amb dades personals de tercers, el nostre paper (responsable independent o encarregat del tractament) es determinarà cas per cas i es recollirà en l'acord d'encàrrec, incloent-hi, si escau, un contracte d'encàrrec del tractament. Apliquem mesures tècniques i organitzatives adequades per protegir les teves dades [COMPLETAR/VALIDAR: descriure les mesures].
+
+**9. Canvis en aquesta política**
+Podem actualitzar aquesta política per reflectir canvis en la nostra activitat o en la normativa. La data de l'última versió consta a la part superior.
+
+---
+
+### PÀGINA `/ca/politica-de-cookies` — Política de cookies
+
+*Darrera actualització: [COMPLETAR: data de publicació]*
+
+**1. Què són les cookies?**
+Les cookies i tecnologies similars són petits fitxers o fragments d'informació que un lloc web desa al teu dispositiu quan el visites. Poden ser estrictament necessàries perquè el lloc funcioni, o servir per a analítica, personalització o publicitat.
+
+**2. Què fem servir en aquest lloc web?**
+Aquest lloc web està dissenyat per funcionar sense cookies no essencials: no utilitza cookies d'analítica, publicitat ni seguiment, no incrusta contingut de tercers (com mapes o vídeos) i no carrega tipografies ni scripts externs. [COMPLETAR/VALIDAR: després d'escanejar el web publicat a fidepath.com, llistar aquí totes les cookies o emmagatzematges similars trobats, amb nom, titular, finalitat i durada — o indicar «A la data d'aquesta política no s'instal·la cap cookie».]
+
+| Nom | Titular | Finalitat | Durada | Tipus |
+|---|---|---|---|---|
+| [COMPLETAR/VALIDAR] | [COMPLETAR] | [COMPLETAR] | [COMPLETAR] | Estrictament necessària |
+
+Les cookies tècniques estrictament necessàries no requereixen el teu consentiment. El nostre proveïdor d'allotjament pot tractar dades tècniques (com l'adreça IP) en registres del servidor per motius de seguretat i funcionament; consulta la nostra [Política de privadesa](/ca/politica-de-privadesa).
+
+**3. Si això canvia**
+Si en algun moment afegim cookies no essencials (per exemple, d'analítica), actualitzarem abans aquesta política i et demanarem el consentiment mitjançant un bàner que et permeti acceptar, rebutjar o configurar-les amb la mateixa facilitat, i no les instal·larem abans que el donis.
+
+**4. Com gestionar les cookies al navegador**
+Pots permetre, bloquejar o eliminar cookies des de la configuració del navegador. Instruccions: [Chrome](https://support.google.com/chrome/answer/95647?hl=ca), [Firefox](https://support.mozilla.org/ca/kb/proteccio-de-seguiment-millorada-firefox-escriptori), [Safari](https://support.apple.com/ca-es/guide/safari/sfri11471/mac), [Edge](https://support.microsoft.com/ca-es/microsoft-edge/suprimir-les-cookies-al-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09).
+
+**5. Contacte**
+Per a qualsevol dubte sobre aquesta política: joan.perello@fidepath.com.
+
+════════════════════════════════════════
+## ESPAÑOL
+════════════════════════════════════════
+
+### PÁGINA `/es/aviso-legal` — Aviso legal
+
+*Última actualización: [COMPLETAR: fecha de publicación]*
+
+**1. Titular del sitio web**
+En cumplimiento del artículo 10 de la Ley 34/2002, de servicios de la sociedad de la información y de comercio electrónico (LSSI), el titular de este sitio web es:
+
+- Nombre / denominación social: [COMPLETAR: titular legal — nombre y apellidos o denominación social]
+- Nombre comercial: FidePath Expert Services
+- NIF/NIE/CIF: [COMPLETAR: número de identificación fiscal]
+- Dirección: Carrer Desbach 3, 1r esquerra, Palma (Balears), España [COMPLETAR/VALIDAR: confirmar que es el domicilio profesional publicable; añadir código postal]
+- Correo electrónico: joan.perello@fidepath.com
+- Teléfono: +34 615 847 893 [COMPLETAR/VALIDAR: confirmar el número]
+- Registro Mercantil (solo sociedades): [COMPLETAR: registro, tomo, folio, hoja — o eliminar si no aplica]
+- Dominio: fidepath.com [COMPLETAR/VALIDAR: confirmar registro y titularidad]
+- Datos profesionales (solo si se ejerce una profesión regulada): título oficial español de «Ingeniero de Caminos, Canales y Puertos» (Universitat Politècnica de Catalunya, España); colegio o institución profesional y número [COMPLETAR/VALIDAR: p. ej. CICCP, número — el CV indica 31985; confirmar a qué corresponde]; normas profesionales aplicables [COMPLETAR/VALIDAR]. Eliminar esta línea si se confirma que no aplica.
+
+**2. Objeto del sitio web**
+Este sitio web presenta los servicios de consultoría técnica independiente de FidePath Expert Services: planificación forense, análisis de retrasos en obras de construcción, evaluación de ampliaciones de plazo, análisis de disrupciones, informes periciales independientes y apoyo técnico en reclamaciones y controversias de construcción, para clientes del Reino Unido, Europa y Oriente Medio [COMPLETAR/VALIDAR: alcance de los servicios y territorios], y permite a los visitantes enviar una consulta.
+
+**3. Naturaleza de la información**
+El contenido de este sitio web es informativo y técnico. No constituye asesoramiento jurídico ni crea una relación profesional. Cualquier encargo se formaliza por separado en un acuerdo escrito que recoge su alcance, entregables, honorarios y condiciones.
+
+**4. Condiciones de uso**
+El acceso a este sitio web es gratuito. Los usuarios se comprometen a hacer un uso lícito y de buena fe, y a no utilizarlo de forma ilícita, perjudicial para terceros o que pueda dañar, sobrecargar o deteriorar el sitio web o su disponibilidad.
+
+**5. Propiedad intelectual e industrial**
+Los textos, imágenes, diseño, estructura y demás contenidos de este sitio web pertenecen al titular o se utilizan bajo licencia, y están protegidos por la legislación de propiedad intelectual. [COMPLETAR/VALIDAR: titularidad/registro del nombre comercial y la marca FidePath.] No se permite su reproducción, distribución o modificación sin autorización previa y por escrito, salvo en los casos permitidos por la ley.
+
+**6. Responsabilidad**
+Procuramos mantener la información exacta y actualizada, pero no garantizamos que el sitio web esté siempre disponible ni libre de errores. La información es de carácter general y no sustituye un análisis específico de tu proyecto. No nos hacemos responsables del contenido de sitios web de terceros a los que se pueda enlazar desde aquí.
+
+**7. Enlaces**
+Este sitio web puede contener enlaces a sitios de terceros (por ejemplo, nuestro perfil de LinkedIn). No los controlamos ni respondemos de su contenido ni de sus prácticas de privacidad.
+
+**8. Protección de datos y cookies**
+El tratamiento de datos personales se explica en nuestra [Política de privacidad](/es/politica-de-privacidad). La información sobre cookies está en nuestra [Política de cookies](/es/politica-de-cookies).
+
+**9. Legislación aplicable y jurisdicción**
+Este Aviso legal se rige por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales de Palma (Illes Balears), sin perjuicio de las normas imperativas de protección de los consumidores [COMPLETAR/VALIDAR: jurisdicción].
+
+---
+
+### PÁGINA `/es/politica-de-privacidad` — Política de privacidad
+
+*Última actualización: [COMPLETAR: fecha de publicación]*
+
+Esta política explica cómo tratamos los datos personales que nos envías a través de este sitio web.
+
+**1. ¿Quién es el responsable de tus datos?**
+- Responsable: [COMPLETAR: titular legal — nombre y apellidos o denominación social], con nombre comercial FidePath Expert Services
+- NIF/NIE/CIF: [COMPLETAR]
+- Dirección: Carrer Desbach 3, 1r esquerra, Palma (Balears), España [COMPLETAR/VALIDAR]
+- Correo electrónico para asuntos de privacidad: joan.perello@fidepath.com [COMPLETAR/VALIDAR: correo específico, si lo hay]
+- Delegado de protección de datos: no designado [COMPLETAR/VALIDAR]
+
+**2. ¿Qué datos recogemos?**
+Cuando nos contactes por correo electrónico, teléfono o LinkedIn: tu nombre, dirección de correo electrónico y/o teléfono, tu empresa y cargo si los facilitas, y el contenido del mensaje y la información sobre el proyecto que decidas compartir. Nuestro proveedor de alojamiento también puede tratar datos técnicos, como la dirección IP o información del navegador y del dispositivo, en registros del servidor, por motivos de seguridad y funcionamiento [COMPLETAR/VALIDAR: comprobar con la configuración técnica final].
+
+Te pedimos que no envíes en el primer mensaje contratos, planos, programaciones u otros documentos del proyecto, ni datos personales de terceros. Si damos curso a tu consulta, te indicaremos cómo enviarnos documentos de forma segura.
+
+**3. ¿Para qué usamos tus datos y con qué base jurídica?**
+
+| Finalidad | Base jurídica |
+|---|---|
+| Responder a tu consulta y contactarte por ese motivo | Tu consentimiento, otorgado al contactarnos — art. 6.1.a RGPD |
+| Preparar la propuesta o presupuesto que hayas solicitado | Aplicación de medidas precontractuales a petición tuya — art. 6.1.b RGPD |
+| Conservar un registro de consultas para gestionar posibles contactos futuros y defendernos ante reclamaciones | Nuestro interés legítimo en gestionar y defender nuestra actividad profesional — art. 6.1.f RGPD [COMPLETAR/VALIDAR] |
+| Cumplir obligaciones fiscales, contables y otras obligaciones legales si llegamos a prestar servicios | Obligación legal — art. 6.1.c RGPD |
+
+Facilitar los campos obligatorios es necesario para atender tu consulta; sin ellos no podemos responderte. No enviamos boletines ni comunicaciones comerciales, no tomamos decisiones automatizadas sobre ti ni elaboramos perfiles [COMPLETAR/VALIDAR]. Puedes retirar tu consentimiento en cualquier momento, sin que ello afecte a la licitud del tratamiento realizado antes.
+
+**4. ¿Cuánto tiempo conservamos tus datos?**
+- Consultas que no dan lugar a un encargo: hasta [COMPLETAR/VALIDAR: propuesta de 12] meses desde el último contacto; después se suprimen o anonimizan.
+- Si prestamos servicios: durante la relación y, después, durante los plazos legales de prescripción aplicables en materia fiscal, contable y de responsabilidad contractual.
+- Si hay una reclamación pendiente, hasta que se resuelva.
+
+**5. ¿Quién recibe tus datos?**
+Solo proveedores tecnológicos que tratan datos por cuenta nuestra y con un contrato de encargo del tratamiento: [COMPLETAR: proveedor de alojamiento web (p. ej. Vercel — pendiente de confirmar)], [COMPLETAR: proveedor de correo electrónico de joan.perello@fidepath.com]. No cedemos datos a otros terceros, salvo obligación legal (p. ej. administraciones tributarias, juzgados).
+
+**6. Transferencias internacionales**
+[COMPLETAR/VALIDAR: Algunos proveedores pueden tratar datos fuera del Espacio Económico Europeo, por ejemplo en Estados Unidos. En ese caso, las transferencias se basan en [decisión de adecuación / Marco de Privacidad de Datos UE–EE. UU. / Cláusulas contractuales tipo] y puedes solicitarnos una copia de las garantías. Si no hay ninguna transferencia, indicarlo aquí.]
+
+**7. ¿Qué derechos tienes?**
+Puedes ejercer los derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad, y retirar tu consentimiento, escribiendo a joan.perello@fidepath.com [COMPLETAR/VALIDAR] e indicando qué derecho quieres ejercer. Podemos pedirte que acredites tu identidad. También tienes derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (AEPD) — [www.aepd.es](https://www.aepd.es) — si consideras que se han vulnerado tus derechos.
+
+**8. Datos de terceros, documentos de proyecto y seguridad**
+Este sitio web se dirige a profesionales y empresas y no está pensado para menores. Si un encargo implica documentos de proyecto con datos personales de terceros, nuestro papel (responsable independiente o encargado del tratamiento) se determinará caso por caso y se recogerá en el acuerdo de encargo, incluyendo, si procede, un contrato de encargado del tratamiento. Aplicamos medidas técnicas y organizativas adecuadas para proteger tus datos [COMPLETAR/VALIDAR: describir las medidas].
+
+**9. Cambios en esta política**
+Podemos actualizar esta política para reflejar cambios en nuestra actividad o en la normativa. La fecha de la última versión figura en la parte superior.
+
+---
+
+### PÁGINA `/es/politica-de-cookies` — Política de cookies
+
+*Última actualización: [COMPLETAR: fecha de publicación]*
+
+**1. ¿Qué son las cookies?**
+Las cookies y tecnologías similares son pequeños archivos o fragmentos de información que un sitio web guarda en tu dispositivo cuando lo visitas. Pueden ser estrictamente necesarias para que el sitio funcione, o servir para analítica, personalización o publicidad.
+
+**2. ¿Qué usamos en este sitio web?**
+Este sitio web está diseñado para funcionar sin cookies no esenciales: no utiliza cookies de analítica, publicidad ni seguimiento, no incrusta contenido de terceros (como mapas o vídeos) y no carga tipografías ni scripts externos. [COMPLETAR/VALIDAR: tras escanear la web publicada en fidepath.com, listar aquí todas las cookies o almacenamientos similares encontrados, con nombre, titular, finalidad y duración — o indicar «A la fecha de esta política no se instala ninguna cookie».]
+
+| Nombre | Titular | Finalidad | Duración | Tipo |
+|---|---|---|---|---|
+| [COMPLETAR/VALIDAR] | [COMPLETAR] | [COMPLETAR] | [COMPLETAR] | Estrictamente necesaria |
+
+Las cookies técnicas estrictamente necesarias no requieren tu consentimiento. Nuestro proveedor de alojamiento puede tratar datos técnicos (como la dirección IP) en registros del servidor por motivos de seguridad y funcionamiento; consulta nuestra [Política de privacidad](/es/politica-de-privacidad).
+
+**3. Si esto cambia**
+Si en algún momento añadimos cookies no esenciales (por ejemplo, de analítica), actualizaremos antes esta política y te pediremos el consentimiento mediante un banner que te permita aceptarlas, rechazarlas o configurarlas con la misma facilidad, y no las instalaremos antes de que lo des.
+
+**4. Cómo gestionar las cookies en tu navegador**
+Puedes permitir, bloquear o eliminar cookies desde la configuración de tu navegador. Instrucciones: [Chrome](https://support.google.com/chrome/answer/95647?hl=es), [Firefox](https://support.mozilla.org/es/kb/proteccion-mejorada-contra-rastreo-firefox-escritorio), [Safari](https://support.apple.com/es-es/guide/safari/sfri11471/mac), [Edge](https://support.microsoft.com/es-es/microsoft-edge/eliminar-las-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09).
+
+**5. Contacto**
+Para cualquier duda sobre esta política: joan.perello@fidepath.com.
